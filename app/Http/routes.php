@@ -21,5 +21,5 @@ Route::get('/', function () {
 Route::get('/api/project', 'ProjectController@index');
 Route::post('/api/project', 'ProjectController@store');
 
-Route::get('/api/project/issues', 'IssueController@index');
-Route::post('/api/project/issues', 'IssueController@store');
+//Route::get('/api/project/issues', 'IssueController@index');
+//Route::post('/api/project/issues', 'IssueController@store');
