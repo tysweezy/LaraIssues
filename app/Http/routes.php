@@ -16,10 +16,17 @@ Route::get('/', function () {
 });
 
 
+
+
+
 /*** API ***/
 
 Route::get('/api/project', 'ProjectController@index');
 Route::post('/api/project', 'ProjectController@store');
+
+// Issue
+Route::get('/api/project/{case}', 'IssuesController@show');
+Route::post('api/project/{case}', 'IssuesController@store');
 
 //Route::get('/api/project/issues', 'IssueController@index');
 //Route::post('/api/project/issues', 'IssueController@store');

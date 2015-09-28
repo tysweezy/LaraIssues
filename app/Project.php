@@ -9,4 +9,10 @@ class Project extends Model
     protected $table = 'projects';
 
     protected $fillable = ['project_name'];
+
+    public function issues() 
+    {
+    	$this->hasMany('App\Issues');
+    }
+
 }
