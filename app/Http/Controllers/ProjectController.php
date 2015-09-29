@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Project;
 use App\Http\Requests;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
@@ -17,39 +18,52 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Project::all(); 
+        return Project::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  Request  $request
+     * @todo validate...throw http error when project does not save
      * @return Response
      */
     public function store(Request $request)
     {
-        //
+        $project = Project::create($request->all());
+
+        $project->save();
+
+        return response()->json([
+            $project,
+            'success' => true
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
+     * @todo show all issues tied to this project
      * @return Response
      */
-    public function show($id)
+    public function show(Response $response, $id)
     {
-        //
+        $project = Project::find($id);
+
+        if ( ! $project ) {
+
+            return response()->json([
+                'status_code' => 404,
+                'message'     => 'project does not exist'
+            ], 404);
+        } 
+
+        return response()->json([
+            $project,
+            'status_code' => $response->status()
+        ], 200);
     }
 
     /**

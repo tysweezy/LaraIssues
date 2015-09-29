@@ -12,6 +12,6 @@ class issues extends Model
 
     public function project()
     {
-    	return s$this->belongsTo('App\Project');
+    	return $this->belongsTo('App\Project');
     }
 }

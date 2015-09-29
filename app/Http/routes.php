@@ -24,6 +24,8 @@ Route::get('/', function () {
 Route::get('/api/project', 'ProjectController@index');
 Route::post('/api/project', 'ProjectController@store');
 
+Route::get('/api/project/{id}', 'ProjectController@show');
+
 // Issue
 Route::get('/api/project/{case}', 'IssuesController@show');
 Route::post('api/project/{case}', 'IssuesController@store');
