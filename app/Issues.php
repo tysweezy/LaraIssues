@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class issues extends Model
+class Issues extends Model
 {
     protected $table = 'issues';
 
-    protected $fillable = ['subject', 'description', 'project_id'];
+    protected $fillable = ['subject', 'description', 'projects_id'];
 
     public function project()
     {

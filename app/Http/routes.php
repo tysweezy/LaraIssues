@@ -12,23 +12,26 @@
 */
 
 Route::get('/', function () {
-    return 'Welcome to issues';
+
+
+  $projects = App\Project::all();
+
+  return view('home')->with('projects', $projects);
 });
 
+// Software default routes --  @todo
 
 
 
 
 /*** API ***/
 
-Route::get('/api/project', 'ProjectController@index');
-Route::post('/api/project', 'ProjectController@store');
+Route::get('/api/projects', 'ProjectController@index'); // get all projects
+Route::post('/api/project', 'ProjectController@store'); // store one project
 
-Route::get('/api/project/{id}', 'ProjectController@show');
+Route::get('/api/project/{project_name}', 'ProjectController@show');
 
 // Issue
-Route::get('/api/project/{case}', 'IssuesController@show');
-Route::post('api/project/{case}', 'IssuesController@store');
-
-//Route::get('/api/project/issues', 'IssueController@index');
-//Route::post('/api/project/issues', 'IssueController@store');
+Route::get('/api/project/{project_name}/issues', 'IssuesController@index');
+Route::get('/api/project/{project_name}/issues/{case}', 'IssuesController@show');
+Route::post('api/project/{project_name}/issues/{case}', 'IssuesController@store');

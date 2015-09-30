@@ -10,16 +10,12 @@ class Project extends Model
 {
     protected $table = 'projects';
 
-    protected $fillable = ['project_name'];
+    protected $fillable = ['project_name', 'projects_id'];
 
-    /* public function __construct(Model $model)
-    {
-      $this->model = $model;
-    } */
 
     public function issues() 
     {
-    	$this->hasMany('App\Issues');
+    	return $this->hasMany('App\Issues');
     }
 
     /**
@@ -27,9 +23,9 @@ class Project extends Model
      * 
      * @return int
      */ 
-    public function issueCount($project_id) 
+    public function issueCount() 
     {
-      $issues = Issues::where('project_id', '=', $project_id)->get(); 
+      $issues = $this->issues();
 
       if ( ! count($issues) ) {
         return abort(404);

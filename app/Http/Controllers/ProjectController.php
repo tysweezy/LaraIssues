@@ -48,11 +48,11 @@ class ProjectController extends Controller
      * @todo show all issues tied to this project
      * @return Response
      */
-    public function show(Response $response, $id)
+    public function show(Response $response, $project_name)
     {
-        $project = Project::find($id);
+        $project = Project::where('project_name', '=', $project_name)->first(); 
 
-        if ( ! $project ) {
+        if ( ! count($project) ) {
 
             return response()->json([
                 'status_code' => 404,
@@ -65,6 +65,9 @@ class ProjectController extends Controller
             'status_code' => $response->status()
         ], 200);
     }
+
+
+    
 
     /**
      * Show the form for editing the specified resource.

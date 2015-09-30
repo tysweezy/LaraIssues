@@ -4,19 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Project;
+use App\Issues;
 use App\Http\Requests;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
-class IssuesController extends Controller
+class IssuesController extends Controller 
 {
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
+    public function index($project_name)
     {
-        //
+        $project = Project::where('project_name', '=', $project_name)->first();
+
+        //$issues = Issues::where('project_id', '=', $project->id)->get();
+
+        if (! count($project) ) {
+            abort(404);
+        }        
+    
+
+        return response()->json([
+            $project,
+            'issues' => $project->issues()->get()
+        ], 200);
     }
 
     /**
@@ -44,12 +59,22 @@ class IssuesController extends Controller
      * Display the specified resource. 
      * Instead of issue id...cases start 1
      *
-     * @param  int  $case
+     * @param  int  $project_name $case
      * @return Response
      */
-    public function show($case)
+    public function show($project_name, $case)
     {
-        //
+        $project = Project::where('project_name', '=', $project_name)->first();
+
+        $case = $project->issues()->where('id', '=', $case)->get();
+
+        if ( ! count($case) ) {
+            abort(404);
+        }
+
+        return response()->json([
+            $case
+        ], 200);
     }
 
     /**
