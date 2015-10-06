@@ -12,7 +12,6 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        // DB::truncate();
 
         for ($i = 0; $i < 3; $i++) {
            $faker = Faker\Factory::create();

@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Welcome to LaraIssues</title>
-</head>
-<body>
+@extends('layout.default')
+
+@section('content')
+
   <h1>Projects</h1>
 
 
@@ -12,4 +9,5 @@
     <div><a href="{{ $project->project_name }}">{{ $project->project_name }}</a></div>    
   @endforeach
 </body>
-</html>
+
+@stop

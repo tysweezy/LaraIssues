@@ -11,15 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-
-
-  $projects = App\Project::all();
-
-  return view('home')->with('projects', $projects);
-});
-
+Route::get('/', 'ProjectController@getAll');
 // Software default routes --  @todo
+
+Route::get('{project_name}', 'ProjectController@showProject');
 
 
 
