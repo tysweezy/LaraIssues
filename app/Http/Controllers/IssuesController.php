@@ -89,7 +89,7 @@ class IssuesController extends Controller
     }
 
 
-   //------------- API
+   //------------- API 
 
     /**
      * Display a listing of the resource.
