@@ -18,20 +18,11 @@ class Project extends Model
     	return $this->hasMany('App\Issues');
     }
 
-    /**
-     * Count the number issues
-     * 
-     * @return int
-     */ 
-    public function issueCount() 
+    
+    public function getProjectname($projectname)  
     {
-      $issues = $this->issues();
+        $projectname = $this->where('project_name', '=', $projectname)->first();
 
-      if ( ! count($issues) ) {
-        return abort(404);
-      } 
-     
-      return count($issues);
+        return $projectname;
     }
-
 }

@@ -16,6 +16,12 @@ Route::get('/', 'ProjectController@getAll');
 
 Route::get('{project_name}', 'ProjectController@showProject');
 
+Route::get('{project_name}/issue/create', 'IssuesController@createIssue');
+
+Route::post('{project_name}/issue/create', 'IssuesController@storeIssue');
+
+// show an issue.
+Route::get('{project_name}/issue/{case}', 'IssuesController@showIssue');
 
 
 

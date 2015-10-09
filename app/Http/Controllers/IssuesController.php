@@ -10,6 +10,9 @@ use App\Http\Requests;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
+use Input;
+use Validator;
+
 class IssuesController extends Controller 
 {
 
@@ -18,9 +21,11 @@ class IssuesController extends Controller
      *
      * @return Response
      */
-    public function createIssue()
+    public function createIssue(Project $project,$project_name)
     {
-        return view('issue.create');
+        $project = $project->getProjectname($project_name);
+
+        return view('issue.create')->with('project', $project);
     }
 
     /**
@@ -29,23 +34,57 @@ class IssuesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function storeIssue(Request $request)
+    public function storeIssue(Project $project, $project_name)
     {
-        //
+        $project = $project->getProjectname($project_name);
+
+        // todo: refactor validation -- perhaps use a request instead.
+    
+
+        $validation = Validator::make(Input::all(), [
+            'subject'     => 'required',
+            'description' => 'required'  
+        ]);
+
+        // validation logic
+        if ($validation->fails()) {
+            // do something
+            return redirect($project->project_name . '/issue/create')
+                        ->withErrors($validation)
+                        ->withInput();
+        }
+
+        $issue = new Issues;
+
+        $issue->subject       = Input::get('subject');
+        $issue->description   = Input::get('description');
+        $issue->project_id    = $project->id;
+
+        $issue->save();
+
+
+        // Issue::create() is out of scope???
+        /*Issues::create([
+            'subject'      => Input::get('subject'),
+            'description'  => Input::get('description'),
+            'project_id'   => $project->id 
+        ]);*/
+
+        return redirect($project->project_name);
     }
 
     /**
      * Display the specified resource. 
      * Instead of issue id...cases start 1
      *
-     * @param  int  $project_name $case
+     * @param  string $project_name int $case
      * @return Response
      */
-    public function showIssue($project_name, $case)
+    public function showIssue(Project $project, $project_name, $case)
     {
-        $project = Project::where('project_name', '=', $project_name)->first();
+        $project =  $project->getProjectname($project_name);
 
-        $case = $project->issues()->where('id', '=', $case)->get();
+        $case = $project->issues()->where('id', '=', $case)->first();
 
         if ( ! count($case) ) {
             abort(404);

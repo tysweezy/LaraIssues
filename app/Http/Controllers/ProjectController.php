@@ -53,11 +53,12 @@ class ProjectController extends Controller
      * @todo show all issues tied to this project
      * @return Response
      */
-    public function showProject(Response $response, $project_name)
+    public function showProject(Project $project, $project_name)
     {
-        $project = Project::where('project_name', '=', $project_name)->first(); 
 
-        $issues = $project->issues()->get();
+        $project = $project->getProjectname($project_name);
+
+        $issues = $project->issues()->orderBy('id', 'DESC')->get();
 
         if ( ! count($project) ) {
 
@@ -145,9 +146,9 @@ class ProjectController extends Controller
      * @todo show all issues tied to this project
      * @return Response
      */
-    public function show(Response $response, $project_name)
+    public function show(Project $project, $project_name)
     {
-        $project = Project::where('project_name', '=', $project_name)->first(); 
+        $project = $project->getProjectname($project_name); 
 
         if ( ! count($project) ) {
 
