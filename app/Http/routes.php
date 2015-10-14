@@ -11,17 +11,35 @@
 |
 */
 
-Route::get('/', 'ProjectController@getAll');
+Route::get('/', 'ProjectController@getAll'); 
 // Software default routes --  @todo
 
 Route::get('{project_name}', 'ProjectController@showProject');
 
-Route::get('{project_name}/issue/create', 'IssuesController@createIssue');
+Route::get('{project_name}/issue/create', [
+  'middleware' => 'auth', 
+  'uses' => 'IssuesController@createIssue'
+]);
 
-Route::post('{project_name}/issue/create', 'IssuesController@storeIssue');
+Route::post('{project_name}/issue/create', [
+  'middleware' => 'auth',
+  'uses' => 'IssuesController@storeIssue'
+]);
 
 // show an issue.
 Route::get('{project_name}/issue/{case}', 'IssuesController@showIssue');
+
+
+
+// Auth
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 

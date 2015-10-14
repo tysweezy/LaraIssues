@@ -14,5 +14,8 @@ class Issues extends Model
     {
     	return $this->belongsTo('App\Project');
     }
+  
+
+    // comments belong in User -- whenever that gets created.
 } 
 

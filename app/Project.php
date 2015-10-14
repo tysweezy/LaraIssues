@@ -12,7 +12,7 @@ class Project extends Model
 
     protected $fillable = ['project_name', 'projects_id'];
 
-
+    
     public function issues() 
     {
     	return $this->hasMany('App\Issues');
@@ -25,4 +25,6 @@ class Project extends Model
 
         return $projectname;
     }
+
+  
 }
