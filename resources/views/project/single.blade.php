@@ -8,7 +8,7 @@
 
   <ul>
     @foreach($issues as $issue)
-      <li><a href="{{ $project->project_name }}/issue/{{ $issue->id }}">{{ $issue->subject }}</a></li>
+      <li><a href="/{{ $project->project_name }}/issue/{{ $issue->id }}">{{ $issue->subject }}</a></li>
 
     @endforeach
   </ul>

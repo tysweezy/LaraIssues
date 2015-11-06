@@ -1,2 +1,5 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+/** Third party imports **/
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+/** site specific styles **/
+@import "components.scss";

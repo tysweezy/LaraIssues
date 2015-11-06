@@ -9,10 +9,16 @@
     <p class="pull-right">{{ Auth::user()->email }}</p>
   @endif
 
-
+<div class="row">
   @foreach( $projects as $project )
-    <div><a href="{{ $project->project_name }}">{{ $project->project_name }}</a></div>    
+      <div class="col-md-4">
+
+
+      <a class="project-box" href="{{ url( $project->project_name ) }}">{{ $project->project_name }}</a>
+
+      </div>
   @endforeach
+</div>
 </body>
 
 @stop

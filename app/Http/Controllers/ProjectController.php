@@ -71,8 +71,6 @@ class ProjectController extends Controller
     }
 
 
-    
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -107,97 +105,5 @@ class ProjectController extends Controller
         //
     }
 
-   // ------- API 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        return Project::all();
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @todo validate...throw http error when project does not save
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        $project = Project::create($request->all());
-
-        $project->save();
-
-        return response()->json([
-            $project,
-            'success' => true
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @todo show all issues tied to this project
-     * @return Response
-     */
-    public function show(Project $project, $project_name)
-    {
-        $project = $project->getProjectname($project_name); 
-
-        if ( ! count($project) ) {
-
-            return response()->json([
-                'status_code' => 404,
-                'message'     => 'project does not exist'
-            ], 404);
-        } 
-
-        return response()->json([
-            $project,
-            'status_code' => $response->status()
-        ], 200);
-    }
-
-
-    
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  
 }

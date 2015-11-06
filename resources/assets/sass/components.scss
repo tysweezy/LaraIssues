@@ -1,0 +1,16 @@
+.project-box {
+  width: 100%;
+  height: 100px;
+  background: #ccc;
+  text-align: center;
+  position: relative;
+  font-size: 1.3em;
+  line-height: 100px;
+  display: block;
+
+  &:hover {
+    cursor: pointer;
+    background: #e3e3e3;
+  }
+ 
+} 
