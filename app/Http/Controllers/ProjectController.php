@@ -62,7 +62,7 @@ class ProjectController extends Controller
 
         if ( ! count($project) ) {
 
-            return abort(404);
+          return abort(404);
         } 
 
         return view('project.single')
@@ -79,7 +79,9 @@ class ProjectController extends Controller
      */
     public function editProject($id)
     {
-        //
+        // some todos
+            // 1. make sure project is owned by owner (user who created the project)
+            
     }
 
     /**

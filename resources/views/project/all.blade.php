@@ -4,11 +4,6 @@
 
   <h1>Projects</h1>
 
-
-  @if(Auth::check()) 
-    <p class="pull-right">{{ Auth::user()->email }}</p>
-  @endif
-
 <div class="row">
   @foreach( $projects as $project )
       <div class="col-md-4">

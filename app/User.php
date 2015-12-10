@@ -36,4 +36,16 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    /**
+     * User has many issues // Issues submitted by a user.
+     * 
+     * @return relationship
+     */
+    public function issues()
+    {
+        return $this->hasMany('App\Issues');
+    }
+
 }

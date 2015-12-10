@@ -8,7 +8,7 @@ class Issues extends Model
 {
     protected $table = 'issues';
 
-    protected $fillable = ['subject', 'description', 'projects_id'];
+    protected $fillable = ['subject', 'description', 'projects_id', 'user_id'];
 
     public function project()
     {
@@ -16,6 +16,14 @@ class Issues extends Model
     }
   
 
-    // comments belong in User -- whenever that gets created.
+    /**
+     * Issue belongs to user
+     * 
+     * @return relationship
+     */
+    public function user()
+    {
+      return $this->belongsTo('App\User');
+    }
 } 
 

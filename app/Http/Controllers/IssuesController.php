@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
 use App\Project;
 use App\Issues;
 use App\Http\Requests;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Controller;
 
 use Input;
 use Validator;
+use Auth;
 
 class IssuesController extends Controller 
 {
@@ -60,6 +62,17 @@ class IssuesController extends Controller
         $issue->description   = Input::get('description');
         $issue->project_id    = $project->id;
 
+        // check if user is authenticated -- then store user id
+        if (Auth::check()) {
+            $issue->user_id = Auth::user()->id;
+        } 
+
+        // default user_id will store to 0? 0 will be anon
+        // @todo write better way to check if user is anon
+        if ( ! Auth::check() ) {
+            $issue->user_id = 0;
+        }
+
         $issue->save();
        
         
@@ -89,11 +102,14 @@ class IssuesController extends Controller
                         ->where('id', '=', $case)
                         ->first();
 
+
+        $user = User::find($case->user_id);
+            
         if ( ! count($case) ) {
             abort(404);
         }
 
-        return view('issue.single')->with('case', $case);
+        return view('issue.single')->with('case', $case)->with('user', $user);
     }
 
     /**

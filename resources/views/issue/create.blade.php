@@ -6,6 +6,13 @@
 
 @include('errors')
 
+@if( ! Auth::check() )
+  <div class="alert alert-info">
+    You are submitting an issue as an anonymous user.
+  </div>
+@endif
+
+  <!-- todo: use url() method instead of hardcoding absolute url path -->
   <form action="/{{ $project->project_name }}/issue/create" method="post">
 
     {!! csrf_field() !!}
