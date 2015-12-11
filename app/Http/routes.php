@@ -30,6 +30,18 @@ Route::post('{project_name}/issue/create', 'IssuesController@storeIssue');
 Route::get('{project_name}/issue/{case}', 'IssuesController@showIssue');
 
 
+// create a new project
+Route::get('project/create', [
+  'middleware' => 'auth',
+  'uses' => 'ProjectController@createProject'
+]);
+
+
+Route::post('project/create', [
+  'middleware'   => 'auth',
+  'uses'         => 'ProjectController@storeProject'  
+]);
+
 
 // Auth
 // Authentication routes...

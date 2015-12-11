@@ -9,6 +9,9 @@ use App\Http\Requests;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
+use Validator;
+use Input;
+
 class ProjectController extends Controller
 {
 
@@ -31,6 +34,17 @@ class ProjectController extends Controller
 
 
     /**
+     * create project form
+     * 
+     * @return response
+     */
+    public function createProject() 
+    {
+        return view('project.create');
+    } 
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  Request  $request
@@ -39,6 +53,15 @@ class ProjectController extends Controller
      */
     public function storeProject(Request $request)
     {
+
+        $validator = Validator::make(Input::all(), [
+            'project_name'  => 'required' 
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/project/create')->withErrors($validator); 
+        }
+
         $project = Project::create($request->all());
 
         $project->save();

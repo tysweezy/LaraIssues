@@ -75,8 +75,6 @@ class IssuesController extends Controller
 
         $issue->save();
        
-        
-
         // Issue::create() is out of scope???
         /*Issues::create([
             'subject'      => Input::get('subject'),
