@@ -37,8 +37,16 @@
             @else
               Anonymous
             @endif 
+
+          @if($issue->status == 'open')
+            <span class="label label-success">Open</span>
+          @elseif($issue->status == 'closed')
+            <span class="label label-danger">Closed</span>
+          @endif
             
           </p>
+
+
         </li>
       @endforeach
     </ul>

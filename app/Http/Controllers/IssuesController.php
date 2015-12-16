@@ -60,6 +60,7 @@ class IssuesController extends Controller
 
         $issue->subject       = Input::get('subject');
         $issue->description   = Input::get('description');
+        $issue->status        = 'open';
         $issue->project_id    = $project->id;
 
         // check if user is authenticated -- then store user id
