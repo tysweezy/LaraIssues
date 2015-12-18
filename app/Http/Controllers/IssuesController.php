@@ -157,4 +157,37 @@ class IssuesController extends Controller
     {
         //
     }
+
+    // tags methogs -- might extract to own controller later
+      // two methods. 1.) for creating tag. 2.) for assigning tag to issue
+    /**
+     * Create a new tag -- POST
+     * 
+     * @return response
+     */
+    public function createTag()
+    {
+        /** $tag = new Tags;
+        $tag->tag_name = Input::get('tag_name');
+        $tag->save(); **/
+
+        // reduce code to one line
+        Tags::create(['tag_name' => Input::get('tag_name')]); 
+
+        // redirect to previous location for now
+        return back();
+    }
+
+    /**
+     * assign a tag to an issue -- POST
+     * 
+     * @return reponse
+     */
+    public function assignTag()
+    {
+        // grab project name and issue id
+         // get tag 
+        // attach tag to issue
+    }
+
 }
