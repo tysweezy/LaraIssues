@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Project;
 use App\Issues;
+use App\Tags;
 use App\Http\Requests;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -97,6 +98,8 @@ class IssuesController extends Controller
     {
         $project =  $project->getProjectname($project_name);
 
+        $tags = Tags::all();
+
         $case = $project->issues()
                         ->where('id', '=', $case)
                         ->first();
@@ -108,7 +111,7 @@ class IssuesController extends Controller
             abort(404);
         }
 
-        return view('issue.single')->with('case', $case)->with('user', $user);
+        return view('issue.single')->with('case', $case)->with('user', $user)->with('tags', $tags);
     }
 
     /**
@@ -171,11 +174,21 @@ class IssuesController extends Controller
         $tag->tag_name = Input::get('tag_name');
         $tag->save(); **/
 
+
+
+        $validation = Validator::make(Input::all(), [
+            'tag_name'  => 'required'
+        ]);
+
+        if ($validation->fails()) {
+            return back()->withErrors($validation);
+        }
+
         // reduce code to one line
         Tags::create(['tag_name' => Input::get('tag_name')]); 
 
         // redirect to previous location for now
-        return back();
+        return back()->with('success', 'Tag created!');
     }
 
     /**

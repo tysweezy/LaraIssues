@@ -12,7 +12,6 @@
 
 </div>
 
-
 <div class="panel panel-default">
   <div class="panel-heading">Current Issues</div>
   <div class="panel-body">
