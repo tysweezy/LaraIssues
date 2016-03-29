@@ -11,11 +11,15 @@
     <strong>Tags</strong>
 
     <ul>
-      @foreach($tags as $tag) 
-        <li>{{ $tag->tag_name }}</li>
+      @foreach($issue->tags as $tag) 
+        <li class="label label-default">{{ $tag->tag_name }}</li>
       @endforeach
     </ul>
 
+    
+
+  @if (Auth::check())
+   @if(Auth::user()->email == 'tyler@decipherinc.com')
     <strong>Create new tag</strong>
 
     @include('errors')
@@ -26,6 +30,8 @@
       <input type="text" name="tag_name" placeholder="Tag Name">
       <input type="submit" value="New Tag">
     </form>
+    @endif
+  @endif  
   </div>
 </div>  
 

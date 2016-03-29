@@ -25,5 +25,13 @@ class Issues extends Model
     {
       return $this->belongsTo('App\User');
     }
+
+    /**
+     * Belongs to many
+     */
+    public function tags()
+    {
+      return $this->belongsToMany('App\Tags', 'issue_tag', 'issue_id', 'tag_id');
+    } 
 } 
 

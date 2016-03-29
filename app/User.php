@@ -47,5 +47,4 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Issues');
     }
-
 }

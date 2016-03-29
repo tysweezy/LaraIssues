@@ -98,12 +98,17 @@ class IssuesController extends Controller
     {
         $project =  $project->getProjectname($project_name);
 
-        $tags = Tags::all();
+        // $tags = Tags::all();
 
         $case = $project->issues()
                         ->where('id', '=', $case)
                         ->first();
 
+        $issue = Issues::find($case->id);
+
+        /* foreach ($issue->tags as $tag) {
+            dd($tag->tag_name);
+        }*/                   
 
         $user = User::find($case->user_id);
             
@@ -111,7 +116,7 @@ class IssuesController extends Controller
             abort(404);
         }
 
-        return view('issue.single')->with('case', $case)->with('user', $user)->with('tags', $tags);
+        return view('issue.single')->with('case', $case)->with('user', $user)->with('issue', $issue);
     }
 
     /**
@@ -173,8 +178,6 @@ class IssuesController extends Controller
         /** $tag = new Tags;
         $tag->tag_name = Input::get('tag_name');
         $tag->save(); **/
-
-
 
         $validation = Validator::make(Input::all(), [
             'tag_name'  => 'required'

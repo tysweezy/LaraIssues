@@ -2,7 +2,7 @@
 
 @section('content')
  
-  <h2>Submit Issue</h2>
+<h2>Submit Issue</h2>
 
 @include('errors')
 
