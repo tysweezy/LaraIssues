@@ -8,7 +8,7 @@
     <h2>{{ $project->project_name }}</h2>
   </div>
 
-  <a href="/{{ $project->project_name }}/issue/create" class="btn btn-success pull-right">New Issue</a>
+  <a href="/{{ $project->project_slug }}/issue/create" class="btn btn-success pull-right">New Issue</a>
 
 </div>
 
@@ -24,7 +24,7 @@
       @foreach($issues as $issue)
         <li>
 
-          <a href="/{{ $project->project_name }}/issue/{{ $issue->id }}">{{ $issue->subject }}</a>
+          <a href="/{{ $project->project_slug }}/issue/{{ $issue->id }}">{{ $issue->subject }}</a>
             
           <p>
             #{{ $issue->id }} opened on {{ $issue->created_at->format('m/d/Y') }}

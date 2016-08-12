@@ -12,8 +12,7 @@
   </div>
 @endif
 
-  <!-- todo: use url() method instead of hardcoding absolute url path -->
-  <form action="/{{ $project->project_name }}/issue/create" method="post">
+  <form action="/{{ $project->project_slug }}/issue/create" method="post">
 
     {!! csrf_field() !!}
 
@@ -21,6 +20,13 @@
      <label for="subject">Subject</label>
      <input type="text" name="subject" placeholder="Subject" class="form-control"> 
     </div>
+
+    @if( ! Auth::check() )
+      <div class="form-group">
+        <label for="anon_email">Enter Your Email for Updates (Optional)</label>
+        <input type="email" name="anon_email" placeholder="Your Email" class="form-control">
+      </div>
+    @endif
 
     <div class="form-group">
      <label for="description">Description</label>

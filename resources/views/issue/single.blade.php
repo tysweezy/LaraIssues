@@ -2,20 +2,25 @@
 
 @section('content')
 
-  <h1>{{ $case->subject }}</h1>  
+  <h1>Case #{{ $case->id }} <span>{{ $case->subject }}</span></h1> 
+
+  @if($case->status == "open")
+    <span class="label label-success">Open</span>
+  @else
+    <span class="label label-danger">Closed</span>
+  @endif
 
 <div class="row pull-right">
   
 
   <div class="col-md-12">
-    <strong>Tags</strong>
+    <!-- <strong>Tags</strong>
 
-    <ul>
+   <ul>
       @foreach($issue->tags as $tag) 
         <li class="label label-default">{{ $tag->tag_name }}</li>
       @endforeach
-    </ul>
-
+    </ul> -->
     
 
   @if (Auth::check())

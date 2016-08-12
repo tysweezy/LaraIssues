@@ -15,12 +15,16 @@
 </div>
 
 
+ @if( count($projects) == 0 ) 
+    <div class="alert alert-info"> There are no projects that I'm currently working on. </div>
+  @endif  
+
 <div class="row">
   @foreach( $projects as $project )
       <div class="col-md-4">
 
 
-      <a class="project-box" href="{{ url( $project->project_name ) }}">{{ $project->project_name }}</a>
+      <a class="project-box" href="{{ $project->project_slug }}">{{ $project->project_name }}</a>
 
       </div>
   @endforeach

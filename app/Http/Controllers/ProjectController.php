@@ -62,7 +62,12 @@ class ProjectController extends Controller
             return redirect('/project/create')->withErrors($validator); 
         }
 
-        $project = Project::create($request->all());
+        $project = Project::create([
+            'project_name'  => $request->input('project_name'),
+            
+        ]);
+
+        $project->project_slug = str_slug($project->project_name, '-');
 
         $project->save();
 
@@ -79,7 +84,7 @@ class ProjectController extends Controller
     public function showProject(Project $project, $project_name)
     {
 
-        $project = $project->getProjectname($project_name);
+        $project = $project->getProjectname($project_name); 
 
         $issues = $project->issues()->orderBy('id', 'DESC')->get();
 

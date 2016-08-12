@@ -21,7 +21,7 @@ class Project extends Model
     
     public function getProjectname($projectname)  
     {
-        $projectname = $this->where('project_name', '=', $projectname)->first();
+        $projectname = $this->where('project_slug', '=', $projectname)->first(); 
 
         return $projectname;
     }

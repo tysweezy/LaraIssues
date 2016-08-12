@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Input;
 use Validator;
 use Auth;
+use Mail;
 
 class IssuesController extends Controller 
 {
@@ -52,7 +53,7 @@ class IssuesController extends Controller
         // validation logic
         if ($validation->fails()) {
             // do something
-            return redirect($project->project_name . '/issue/create')
+            return redirect($project->project_path . '/issue/create')
                         ->withErrors($validation)
                         ->withInput();
         }
@@ -62,7 +63,7 @@ class IssuesController extends Controller
         $issue->subject       = Input::get('subject');
         $issue->description   = Input::get('description');
         $issue->status        = 'open';
-        $issue->project_id    = $project->id;
+        $issue->project_id    = $project->id; 
 
         // check if user is authenticated -- then store user id
         if (Auth::check()) {
@@ -76,15 +77,19 @@ class IssuesController extends Controller
         }
 
         $issue->save();
-       
-        // Issue::create() is out of scope???
-        /*Issues::create([
-            'subject'      => Input::get('subject'),
-            'description'  => Input::get('description'),
-            'project_id'   => $project->id 
-        ]);*/
 
-        return redirect($project->project_name);
+        // will remove when I interact with actual data
+        $data = [];
+
+        // send mail to my personal email once ussue has been created
+        Mail::send('emails.issue', $data, function($m) {
+            $m->from('issue@email.com', 'Issue Reporter');
+
+            $m->to('tyler@decipherinc.com','Tyler Souza')->subject('New Issue Reported');
+        });
+       
+
+        return redirect($project->project_slug); 
     }
 
     /**
