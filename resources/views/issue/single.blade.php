@@ -53,4 +53,30 @@
   </div>
 </div>
 
+
+<!-- comment form -->
+<div class="row">
+  <div class="col-md-12">
+    <form action="" method="post">
+     
+     <div class="form-group">
+       <label for="issue-comment">Leave a comment</label>
+       <textarea name="issue-comment" class="form-control" placeholder="Leave a comment..."></textarea>
+     </div>
+
+     <div class="form-group pull-right">
+      <button type="submit" class="btn btn-success">Post comment</button> 
+     </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- comments list -->
+<div class="row">
+ <div class="col-md-12">
+   <p>oh hello. I'm a comment</p>
+ </div>
+</div>
+
 @stop
